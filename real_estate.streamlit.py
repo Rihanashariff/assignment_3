@@ -18,7 +18,7 @@ schools = st.slider("Schools", 0, 10)
 hospitals = st.slider("Hospitals", 0, 10)
 transport = st.slider("Transport", 0, 10)
 
-year = st.number_input("Year Built", 1990, 2025)
+year = st.number_input("Year Built", 1990, 2026)
 
 property_type = st.selectbox("Type", ["Apartment","Villa","Independent House"])
 furnished = st.selectbox("Furnished", ["Furnished","Semi-Furnished","Unfurnished"])
@@ -29,7 +29,7 @@ availability = st.selectbox("Availability", ["Ready","Under Construction"])
 # Features
 price_sqft = (price * 100000) / size
 amenity = schools + hospitals + transport
-age = 2025 - year
+age = 2026 - year
 
 # Base data
 data = {
@@ -64,7 +64,7 @@ if st.button("Predict"):
     pred = model.predict(df_scaled)[0]
     st.success(f"₹ {round(pred,2)} Lakhs (after 5 years)")
 
-    if price_sqft < 5000 and amenity > 10 and age < 10:
+    if price_sqft < 5000 and amenity >= 10 and age <= 10:
         st.success("✅ Yes, it is a GOOD investment 👍")
     else:
         st.error("❌ No, it is NOT a good investment")
